@@ -1,24 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-import {Header} from "react-typescript-teamplate";
+import {useAnimationState} from "react-typescript-teamplate";
+
 function App() {
+  const {onAnimation, offAnimation, state} = useAnimationState('close');
+  const {onAnimation: onDelay, offAnimation: offDelay, state : state2} = useAnimationState('close', {
+    onDelayType: 'debounce',
+    onAnimationTime: 1000,
+    offAnimationTime: 1000
+  });
   return (
     <div className="App">
-      <Header/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {state}
+      <button onClick={() => onAnimation()}>on</button>
+      <button onClick={() => offAnimation()}>off</button>
+      <br/>
+      {state2}
+      <button onClick={() => onDelay()}>delayon</button>
+      <button onClick={() => offDelay()}>delayoff</button>
     </div>
   );
 }

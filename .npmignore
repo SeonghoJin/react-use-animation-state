@@ -2,3 +2,7 @@
 .husky
 ./src
 .eslintrc.js
+.stroybook
+.prettierrc
+package-lock.json
+
