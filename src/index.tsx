@@ -1,2 +1,1 @@
-export { Header } from './Header/Header';
-export {} from './MyHeader';
+export { useAnimationState } from './useAnimationState';
