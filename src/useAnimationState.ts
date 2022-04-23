@@ -96,6 +96,7 @@ export const useAnimationState = (defaultState: AnimationState = 'close', option
         }
         throw new Error('not supoort onDelayType');
     })();
+
     const offAnimation = (() => {
         if (offDelayType === 'default') {
             return offDefaultAnimation;
@@ -105,6 +106,7 @@ export const useAnimationState = (defaultState: AnimationState = 'close', option
         }
         throw new Error('not support offDelayType');
     })();
+
     return {
         state,
         onAnimation,
