@@ -26,4 +26,4 @@ yarn-error.log*
 
 .idea
 .parcel-cache
-
+storybook-static
