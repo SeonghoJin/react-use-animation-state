@@ -52,6 +52,7 @@ export default AnimationExample;
 ```
 
 #### 더 자세한 사용법을 알고 싶다면 storybook을 확인하세요.
+https://seonghojin.github.io/react-use-animation-state
 
 ## How start storybook
 
