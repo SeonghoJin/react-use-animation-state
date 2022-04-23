@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/react-use-animation-state)](https://www.npmjs.com/package/react-use-animation-state)
+![npm version](https://badge.fury.io/js/react-use-animation-state)(https://www.npmjs.com/package/react-use-animation-state)
 
 # react-use-animation-state
 
