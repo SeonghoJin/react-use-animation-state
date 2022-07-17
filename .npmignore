@@ -1,8 +1,8 @@
-.example
+example
 .husky
 ./src
 .eslintrc.js
-.stroybook
+.storybook
 .prettierrc
 package-lock.json
 

@@ -1,124 +1,150 @@
-var $i9b1P$react = require("react");
+'use strict';
 
-function $parcel$export(e, n, v, s) {
-  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
-}
+Object.defineProperty(exports, '__esModule', { value: true });
 
-$parcel$export(module.exports, "useAnimationState", () => $5172bd83420fc19e$export$7ee548861327febe);
+var react = require('react');
 
-const $5172bd83420fc19e$var$defaultOption = ()=>({
-        onAnimationTime: 0,
-        onDelayType: 'default',
-        onPreemption: false,
-        offAnimationTime: 0,
-        offDelayType: 'default',
-        offPreemption: false
-    })
-;
-const $5172bd83420fc19e$export$7ee548861327febe = (defaultState, option)=>{
-    const [state, setState] = $i9b1P$react.useState(defaultState);
-    const { onAnimationTime: onAnimationTime , offAnimationTime: offAnimationTime , offDelayType: offDelayType , onDelayType: onDelayType , onPreemption: onPreemption , offPreemption: offPreemption  } = $i9b1P$react.useMemo(()=>Object.assign($5172bd83420fc19e$var$defaultOption(), option ?? {})
-    , [
-        option
-    ]);
-    const offTimer = $i9b1P$react.useRef(null);
-    const onTimer = $i9b1P$react.useRef(null);
-    const cleanOnTimer = ()=>{
-        if (onTimer.current) clearTimeout(onTimer.current);
+var defaultOption = function () { return ({
+    onAnimationTime: 0,
+    onDelayType: 'default',
+    onPreemption: false,
+    offAnimationTime: 0,
+    offDelayType: 'default',
+    offPreemption: false,
+}); };
+var useAnimationState = function (defaultState, option) {
+    var _a = react.useState(defaultState), state = _a[0], setState = _a[1];
+    var _b = react.useMemo(function () { return Object.assign(defaultOption(), option !== null && option !== void 0 ? option : {}); }, [option]), onAnimationTime = _b.onAnimationTime, offAnimationTime = _b.offAnimationTime, offDelayType = _b.offDelayType, onDelayType = _b.onDelayType, onPreemption = _b.onPreemption, offPreemption = _b.offPreemption;
+    var offTimer = react.useRef(null);
+    var onTimer = react.useRef(null);
+    var cleanOnTimer = function () {
+        if (onTimer.current) {
+            clearTimeout(onTimer.current);
+        }
     };
-    const cleanOffTimer = ()=>{
-        if (offTimer.current) clearTimeout(offTimer.current);
+    var cleanOffTimer = function () {
+        if (offTimer.current) {
+            clearTimeout(offTimer.current);
+        }
     };
-    const on = ()=>{
-        if (state === 'opening' || state === 'open') return;
+    var on = function () {
+        if (state === 'opening' || state === 'open') {
+            return;
+        }
         if (onAnimationTime === 0) {
             setState('open');
             return;
         }
         setState('opening');
-        onTimer.current = setTimeout(()=>{
+        onTimer.current = setTimeout(function () {
             setState('open');
         }, onAnimationTime);
     };
-    const off = ()=>{
-        if (state === 'close' || state === 'closing') return;
+    var off = function () {
+        if (state === 'close' || state === 'closing') {
+            return;
+        }
         if (offAnimationTime === 0) {
             setState('close');
             return;
         }
         setState('closing');
-        offTimer.current = setTimeout(()=>{
+        offTimer.current = setTimeout(function () {
             setState('close');
         }, offAnimationTime);
     };
-    const onDefaultAnimation = ()=>{
+    var onDefaultAnimation = function () {
         if (onPreemption && (state === 'close' || state === 'closing')) {
             cleanOffTimer();
             on();
             return;
         }
-        if (!onPreemption && state !== 'close') return;
+        if (!onPreemption && state !== 'close') {
+            return;
+        }
         on();
     };
-    const offDefaultAnimation = ()=>{
+    var offDefaultAnimation = function () {
         if (offPreemption && (state === 'open' || state === 'opening')) {
             cleanOnTimer();
             off();
             return;
         }
-        if (!offPreemption && state !== 'open') return;
+        if (!offPreemption && state !== 'open') {
+            return;
+        }
         off();
     };
-    const onDebounceAnimation = ()=>{
-        if (state === 'open') return;
-        if (state === 'closing' && !onPreemption) return;
-        if (state === 'closing' && onPreemption) cleanOffTimer();
+    var onDebounceAnimation = function () {
+        if (state === 'open') {
+            return;
+        }
+        if (state === 'closing' && !onPreemption) {
+            return;
+        }
+        if (state === 'closing' && onPreemption) {
+            cleanOffTimer();
+        }
         if (onAnimationTime === 0) {
             setState('open');
             return;
         }
         cleanOnTimer();
         setState('opening');
-        onTimer.current = setTimeout(()=>setState('open')
-        , onAnimationTime);
+        onTimer.current = setTimeout(function () { return setState('open'); }, onAnimationTime);
     };
-    const offDebounceAnimation = ()=>{
-        if (state === 'close') return;
-        if (state === 'opening' && !offPreemption) return;
-        if (offPreemption && state === 'opening') cleanOnTimer();
+    var offDebounceAnimation = function () {
+        if (state === 'close') {
+            return;
+        }
+        if (state === 'opening' && !offPreemption) {
+            return;
+        }
+        if (offPreemption && state === 'opening') {
+            cleanOnTimer();
+        }
         if (offAnimationTime === 0) {
             setState('close');
             return;
         }
         cleanOffTimer();
         setState('closing');
-        offTimer.current = setTimeout(()=>setState('close')
-        , offAnimationTime);
+        offTimer.current = setTimeout(function () { return setState('close'); }, offAnimationTime);
     };
-    const onAnimation = (()=>{
-        if (onDelayType === 'default') return onDefaultAnimation;
-        if (onDelayType === 'debounce') return onDebounceAnimation;
+    var onAnimation = (function () {
+        if (onDelayType === 'default') {
+            return onDefaultAnimation;
+        }
+        if (onDelayType === 'debounce') {
+            return onDebounceAnimation;
+        }
         throw new Error('not supoort onDelayType');
     })();
-    const offAnimation = (()=>{
-        if (offDelayType === 'default') return offDefaultAnimation;
-        if (offDelayType === 'debounce') return offDebounceAnimation;
+    var offAnimation = (function () {
+        if (offDelayType === 'default') {
+            return offDefaultAnimation;
+        }
+        if (offDelayType === 'debounce') {
+            return offDebounceAnimation;
+        }
         throw new Error('not support offDelayType');
     })();
-    $i9b1P$react.useEffect(()=>{
-        return ()=>{
-            if (offTimer.current) clearTimeout(offTimer.current);
-            if (onTimer.current) clearTimeout(onTimer.current);
+    react.useEffect(function () {
+        return function () {
+            if (offTimer.current) {
+                clearTimeout(offTimer.current);
+            }
+            if (onTimer.current) {
+                clearTimeout(onTimer.current);
+            }
         };
     }, []);
     return {
         state: state,
         onAnimation: onAnimation,
-        offAnimation: offAnimation
+        offAnimation: offAnimation,
     };
 };
 
-
-
-
+exports.useAnimationState = useAnimationState;
 //# sourceMappingURL=index.js.map
